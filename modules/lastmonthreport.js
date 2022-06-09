@@ -1,6 +1,6 @@
 const { Bot, InputFile } = require('grammy')
 const { convertToImageMonthly, getEmployees } = require('../utilities/montly')
-const bot = new Bot('5404650872:AAFxHVGCMDHxTtVq3HVM0EEkV5uq32DrqOY')
+const bot = new Bot(process.env.BOTTOKEN)
 const lastMonthReport = async () => {
   let employees = await getEmployees()
   employees = employees.map((el, index) => {

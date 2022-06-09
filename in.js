@@ -1,3 +1,4 @@
+require('dotenv').config()
 const dailyReport = require('./modules/dailyReport')
 const lastMonthReport = require('./modules/lastMonthReport')
 const { connect } = require('./utilities/daily')

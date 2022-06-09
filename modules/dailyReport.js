@@ -1,6 +1,6 @@
 const { Bot, InputFile } = require('grammy')
 const { convertToImageDaily, getEmployees } = require('../utilities/daily')
-const bot = new Bot('5404650872:AAFxHVGCMDHxTtVq3HVM0EEkV5uq32DrqOY')
+const bot = new Bot(process.env.BOTTOKEN)
 const dailyReport = async () => {
   let employees = await getEmployees()
   employees = employees.map((el, index) => {
