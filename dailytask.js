@@ -5,6 +5,5 @@ const { connect } = require('./utilities/daily')
 const main = async () => {
   await connect()
     dailyReport()
-  lastMonthReport()
 }
 main()
