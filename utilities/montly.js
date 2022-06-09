@@ -7,7 +7,7 @@ const convertToImageMonthly = async employees => {
         <style>
             body {
               width: 1024px;
-              height: 1400px;
+              height: ${100 + employees.length * 40}px;
             }
           </style>
           <script
@@ -26,7 +26,7 @@ const convertToImageMonthly = async employees => {
         </head>
         <body>
           <div class='container'>
-          <h1>Filial 3</h1>
+          <h1>Merrwill Kokand</h1>
             <table class='table table-striped'>
               <tr>
                 <th class='col'>#</th>
@@ -55,9 +55,9 @@ const convertToImageMonthly = async employees => {
 const getEmployees = async () => {
   try {
     const getAllEmpQuery =
-      'select first_name, emp_code from dbo.personnel_employee where personnel_employee.id in (91,92,94,95,96,97,84,98,1153,100,101,102,103,104,105,106,107,1183,109,1160,139,140,112,1151,1158,142,117,87,1159,1154,1152,134,138,1161,89,90)'
+      'select first_name, emp_code from dbo.personnel_employee'
     const getLateEmpQuery =
-      "select dbo.personnel_employee.emp_code, sum( DATEDIFF(MINUTE, '08:30:00',  CONVERT(VARCHAR(10), dbo.iclock_transaction.punch_time, 108))) AS timediff from dbo.personnel_employee join dbo.iclock_transaction on dbo.personnel_employee.emp_code = dbo.iclock_transaction.emp_code WHERE 31> DATEDIFF(day,CAST( punch_time AS Date ), CAST( GETDATE() AS Date )) and DATEDIFF(MINUTE, '08:30:00',CONVERT(VARCHAR(10), dbo.iclock_transaction.punch_time, 108)) > 0 and personnel_employee.id in (91,92,94,95,96,97,84,98,1153,100,101,102,103,104,105,106,107,1183,109,1160,139,140,112,1151,1158,142,117,87,1159,1154,1152,134,138,1161,89,90) group by dbo.personnel_employee.emp_code"
+      "select dbo.personnel_employee.emp_code, sum( DATEDIFF(MINUTE, '08:30:00',  CONVERT(VARCHAR(10), dbo.iclock_transaction.punch_time, 108))) AS timediff from dbo.personnel_employee join dbo.iclock_transaction on dbo.personnel_employee.emp_code = dbo.iclock_transaction.emp_code WHERE 31> DATEDIFF(day,CAST( punch_time AS Date ), CAST( GETDATE() AS Date )) and DATEDIFF(MINUTE, '08:30:00',CONVERT(VARCHAR(10), dbo.iclock_transaction.punch_time, 108)) > 0 group by dbo.personnel_employee.emp_code"
     const emp = await (await sql.query(getAllEmpQuery)).recordset
     const lateemp = (await sql.query(getLateEmpQuery)).recordset
     const result = emp.map(employee => {
@@ -67,7 +67,7 @@ const getEmployees = async () => {
         const element = lateemp[index]
         if (element.emp_code === employee.emp_code) {
           jarima = element.timediff + ' daq.'
-          summa = element.timediff * 1000 + " so'm"
+          summa = element.timediff * 200 + " so'm"
         }
       }
       employee.jarima = jarima

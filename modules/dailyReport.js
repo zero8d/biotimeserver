@@ -1,20 +1,19 @@
 const { Bot, InputFile } = require('grammy')
 const { convertToImageDaily, getEmployees } = require('../utilities/daily')
-const bot = new Bot('5492928469:AAEvqK4t8Hug2Bw3zG0plM0VC41EyoFdkvc')
+const bot = new Bot('5404650872:AAFxHVGCMDHxTtVq3HVM0EEkV5uq32DrqOY')
 const dailyReport = async () => {
   let employees = await getEmployees()
   employees = employees.map((el, index) => {
     return {
       ...el,
       i: index + 1,
-      jarima: el.timediff < 0 ? el.timediff * -1000 + " so'm" : 'Yoq',
+      jarima: el.timediff > 0 ? el.timediff * 200 + " so'm" : 'Yoq',
     }
   })
-
   const image = await convertToImageDaily(employees)
-  await bot.api.sendPhoto(-665250506, new InputFile(image), {
+  await bot.api.sendPhoto(-1001545780698, new InputFile(image), {
     caption:
-      'filial 3\n' +
+      'Kunlik hisobot\n' +
       new Date().getDate() +
       '.' +
       new Date().getMonth() +
